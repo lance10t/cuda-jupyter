@@ -1,0 +1,23 @@
+version: "3.1"
+
+services:
+
+  tf26-notebook:
+    image: cuda/tensorflow-notebook:20211031
+    ports:
+      - "9901:8888"
+
+
+  nlp-notebook:
+    image: cuda/nlp-notebook:20211031
+    ports:
+      - "9911:8888"
+    volumes:
+      - shareddata:/home/jovyan/shareddata
+
+volumes:
+  shareddata:
+    
+    
+    #environment:
+      #- DASK_SCHEDULER_ADDRESS="tcp://scheduler:8786"

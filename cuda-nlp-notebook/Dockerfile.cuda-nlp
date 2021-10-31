@@ -1,0 +1,29 @@
+# Uses the cuda-scipy-notebook as the parent layer
+# Install the following NLP packages
+# - pytorch
+# - spaCy[cuda]
+# - gensim
+# - nltk
+# - transformers
+
+ARG BASE_CONTAINER
+FROM $BASE_CONTAINER
+
+# Install Tensorflow GPU
+RUN pip install \
+torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html \
+spacy[cuda114] \
+gensim \
+transformers \
+nltk && \ 
+python -m spacy download en_core_web_sm && \
+python -m spacy download en_core_web_md && \
+python -m spacy download en_core_web_lg && \
+python -m spacy download en_core_web_trf
+
+# RUN mamba install --quiet --yes \
+#     'tensorflow' && \
+#     mamba clean --all -f -y && \
+#     fix-permissions "${CONDA_DIR}" && \
+#     fix-permissions "/home/${NB_USER}"
+
